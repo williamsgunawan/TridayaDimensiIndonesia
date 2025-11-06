@@ -238,7 +238,7 @@
     .value-item img {
       width: 80px;
       height: 80px;
-      margin-bottom: 15px;
+      margin-bottom: -30px;
     }
     
     .value-item h4 {
@@ -787,8 +787,8 @@
         </div>
         <div class="contact-details">
           <h3>Contact Details</h3>
-          <p>Phone : 0813-1146-5499</p>
-          <p>Email : simon@kotak-hijau.com</p>
+          <p>Phone : +62 881-0101-83823</p>
+          <p>Email : marketing@kotak-hijau.com</p>
         </div>
       </div>
     </div>

@@ -709,8 +709,8 @@
         </div>
         <div class="contact-details">
           <h3>Contact Details</h3>
-          <p>Phone : (021) 27534773</p>
-          <p>Email : simon@indodaya-alihtama.com</p>
+          <p>Phone : +62 888-8387-551</p>
+          <p>Email : marketing@indodaya-alihtama.id</p>
         </div>
       </div>
     </div>
