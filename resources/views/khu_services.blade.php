@@ -1,408 +1,722 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services - Kotak Hijau Utama</title>
   <style>
-    body {
+    /* Reset and base styles */
+    * {
       margin: 0;
       padding: 0;
-      font-family: arial;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      overflow-x: hidden;
+    }
+    
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+    
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
     }
 
-    .logo {
-        width: 7vw;
-        margin-right: 1vw;
-    }
-
-    .logo-container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
-    }
-
-    /* Navbar Styles */
+    /* Navbar */
     .navbar-container {
-        background-color: #F9F5F6;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      background-color: #F9F5F6;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     
     .navbar {
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding-right: 2vw;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 20px;
     }
     
     .navbar-brand {
-        font-size: 2vw;
-        font-weight: bold;
-        color: #008B4B;
-        text-decoration: none;
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: #008B4B;
+      font-weight: bold;
+      font-size: 24px;
+    }
+    
+    .logo {
+      width: 60px;
+      margin-right: 12px;
     }
     
     .navbar-nav {
-        display: flex;
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-    
-    .nav-item {
-        margin-left: 2vw;
-        display: flex;
-        align-items: center;
+      display: flex;
+      list-style: none;
+      gap: 30px;
     }
     
     .nav-link {
-        text-decoration: none;
-        color: #555;
-        font-size: 1.3vw;
-        font-weight: bold;
-        padding: 0.7vw 1vw;
-        transition: all 0.3s;
-        position: relative;
+      text-decoration: none;
+      color: #555;
+      font-weight: bold;
+      padding: 8px 0;
+      transition: all 0.3s;
+      position: relative;
+      font-size: 16px;
+      white-space: nowrap;
     }
     
-    .nav-link:hover {
-        color: #3498db;
-    }
-    
+    .nav-link:hover,
     .nav-link.active {
-        color: #2c3e50;
-        font-weight: 600;
+      color: #3498db;
     }
     
     .nav-link.active::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 0.2vw;
-        background-color: #008B4B;
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: #008B4B;
     }
     
-
-    /* @media (max-width: 768px) {
-        .navbar {
-            flex-wrap: wrap;
-        }
-        
-        .navbar-toggle {
-            display: block;
-        }
-        
-        .navbar-nav {
-            display: none;
-            width: 100%;
-            flex-direction: column;
-            margin-top: 15px;
-        }
-        
-        .navbar-nav.show {
-            display: flex;
-        }
-        
-        .nav-item {
-            margin: 10px 0;
-            margin-left: 0;
-        }
-        
-    } */
-
-    /* Existing Styles */
-    .about-bg {
-        background-color: #00733E;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 13vw;
+    /* Mobile menu toggle - hidden on desktop */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 5px;
+      z-index: 102;
+    }
+    
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #2c3e50;
+      margin-bottom: 5px;
+      border-radius: 2px;
+      transition: 0.3s;
     }
 
-    .about-bg-inner {
-        text-align: center;
+    /* Hero Section */
+    .services-hero {
+      background-color: #00733E;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+      text-align: center;
     }
 
-    .about-bg h1 {
-        font-size: 4vw;
-        margin: 0;
+    .services-hero h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
     }
 
-    .about-bg p {
-        font-size: 1.3vw;
-        margin: 0;
+    .services-hero p {
+      font-size: 18px;
     }
 
-    .line-with-text {
-        display: flex;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-        margin: 5vw 0;
-        color: #008B4B;
+    .services-hero span {
+      color: #5AB685;
     }
 
-    .line-with-text::before,
-    .line-with-text::after {
-        content: '';
-        flex: 1;
-        border-bottom: 0.5vw solid #008B4B;
-        margin: 0 2vw;
-    } 
+    /* Section Header */
+    .section-header {
+      text-align: center;
+      margin: 60px 0 40px;
+      color: #008B4B;
+      position: relative;
+    }
+    
+    .section-header h2 {
+      font-size: 36px;
+      font-weight: bold;
+      display: inline-block;
+      background: white;
+      padding: 0 30px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .section-header::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: #008B4B;
+      transform: translateY(-50%);
+    }
 
-    .line-with-text span {
-        padding: 0 2vw;
-        font-size: 4vw;
-        font-weight: bold;
-        background-color: white;
-        font-family: sans-serif;
-    } 
-
+    /* Subheading */
     .subheading {
-        text-align: center;
-        font-size: 1.5vw;
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 50px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0 20px;
+      line-height: 1.6;
     }
 
-    .two-columns {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        margin: auto;
-        padding: 2vw 6vw;
-
+    /* Service Sections */
+    .service-section {
+      margin: 80px 0;
     }
 
-    .text-column {
-        line-height: 1.6;
+    .service-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+      margin-bottom: 80px;
     }
-
-    .text-column h1 {
-        font-size: 3vw;
-        color: #017942;
-        border-left: 0.5vw solid #017942; 
-        padding-left: 1vw;
-    }
-
-    .text-column p {
-        font-size: 1.2vw;
-        margin-top: 0;
-    }
-
-    .image-column img {
-      height: 29vw;
-    }
-
-    .service-item {
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-        font-size: 1.3vw;
-    }
-
-    .service-item img {
-        width: 4vw;
-        margin-right: 1vw;
-    }
-
-    .footer {
-        margin-top: 10vw;
-        background-color: #00733E;
-        height: 13vw;
-        color: white;
-        display: flex;
-        justify-content: space-between;
-        padding: 4vw;
-    } 
     
-    .footer h1 {
-        font-size: 2vw;
-    } 
+    .service-row.reverse {
+      flex-direction: row-reverse;
+    }
+    
+    .service-image {
+      flex: 1;
+      max-width: 500px;
+    }
+    
+    .service-image img {
+      width: 100%;
+      border-radius: 10px;
+    }
+    
+    .service-content {
+      flex: 1;
+      max-width: 600px;
+    }
+    
+    .service-title {
+      font-size: 32px;
+      color: #017942;
+      border-left: 5px solid #017942;
+      padding-left: 15px;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+    
+    .service-description {
+      font-size: 18px;
+      line-height: 1.7;
+      margin-bottom: 25px;
+    }
 
+    /* Service Items */
+    .service-items {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .service-item {
+      display: flex;
+      align-items: center;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    
+    .service-item img {
+      width: 40px;
+      height: 40px;
+      margin-right: 15px;
+    }
+
+    /* Gallery Section */
+    .gallery-section {
+      margin: 60px 0;
+    }
+
+    .gallery-image {
+      text-align: center;
+      margin: 40px 0;
+    }
+    
+    .gallery-image img {
+      max-width: 100%;
+      border-radius: 8px;
+    }
+
+    /* Footer */
+    .footer {
+      background-color: #00733E;
+      color: white;
+      padding: 60px 0 40px;
+      margin-top: 80px;
+    }
+    
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+    
+    .footer h3 {
+      font-size: 20px;
+      margin-bottom: 20px;
+    }
+    
     .footer p {
-        font-size: 1.2vw;
-        margin: 1vw 0;
-    } 
+      font-size: 16px;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
 
-    .tdi-footer {
-        margin-right: 13vw;
+    /* ===== MOBILE STYLES ===== */
+    @media (max-width: 768px) {
+      .container {
+        padding: 0 15px;
+      }
+      
+      /* Mobile Navbar */
+      .navbar {
+        padding: 12px 15px;
+      }
+      
+      .navbar-brand {
+        font-size: 18px;
+      }
+      
+      .logo {
+        width: 40px;
+        margin-right: 8px;
+      }
+      
+      .menu-toggle {
+        display: flex;
+      }
+      
+      .navbar-nav {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background: white;
+        flex-direction: column;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        display: flex;
+        z-index: 101;
+        gap: 0;
+        margin-top: 0;
+        padding-top: 80px;
+        transition: right 0.3s ease;
+      }
+      
+      .navbar-nav.active {
+        right: 0;
+      }
+      
+      .nav-item {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .nav-link {
+        display: block;
+        padding: 18px 20px;
+        font-size: 18px;
+        width: 100%;
+        text-align: left;
+      }
+
+      /* Hero Section */
+      .services-hero {
+        height: 150px;
+      }
+
+      .services-hero h1 {
+        font-size: 28px;
+      }
+
+      .services-hero p {
+        font-size: 16px;
+      }
+
+      /* Section Header */
+      .section-header {
+        margin: 40px 0 30px;
+      }
+      
+      .section-header h2 {
+        font-size: 28px;
+        padding: 0 20px;
+      }
+
+      /* Subheading */
+      .subheading {
+        font-size: 16px;
+        margin-bottom: 40px;
+        padding: 0 15px;
+      }
+
+      /* Service Sections */
+      .service-section {
+        margin: 60px 0;
+      }
+
+      .service-row {
+        flex-direction: column;
+        gap: 30px;
+        margin-bottom: 60px;
+      }
+      
+      .service-row.reverse {
+        flex-direction: column;
+      }
+      
+      .service-image {
+        max-width: 100%;
+      }
+      
+      .service-title {
+        font-size: 24px;
+        border-left-width: 4px;
+        padding-left: 12px;
+      }
+      
+      .service-description {
+        font-size: 16px;
+      }
+
+      /* Service Items */
+      .service-item {
+        font-size: 14px;
+      }
+      
+      .service-item img {
+        width: 35px;
+        height: 35px;
+        margin-right: 12px;
+      }
+
+      /* Gallery Section */
+      .gallery-section {
+        margin: 40px 0;
+      }
+
+      .gallery-image {
+        margin: 30px 0;
+      }
+
+      /* Footer */
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .footer h3 {
+        font-size: 18px;
+      }
+    }
+
+    /* Small Mobile */
+    @media (max-width: 480px) {
+      .services-hero {
+        height: 130px;
+      }
+
+      .services-hero h1 {
+        font-size: 24px;
+      }
+
+      .services-hero p {
+        font-size: 14px;
+      }
+
+      .section-header h2 {
+        font-size: 24px;
+      }
+
+      .subheading {
+        font-size: 14px;
+      }
+
+      .service-title {
+        font-size: 20px;
+      }
+
+      .service-description {
+        font-size: 14px;
+      }
+
+      .service-item {
+        font-size: 13px;
+      }
+      
+      .service-item img {
+        width: 30px;
+        height: 30px;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Navbar -->
   <div class="navbar-container">
-    <nav class="navbar">
+    <div class="container">
+      <nav class="navbar">
         <a href="{{ url('/kotakhijauutama') }}" class="navbar-brand">
-            <div class="logo-container">
-                <img src="{{ asset('assets/khu_logo.png') }}" class="logo" alt="logo">
-                PT. KOTAK HIJAU UTAMA
-            </div>
+          <img src="{{ asset('assets/khu_logo.png') }}" class="logo" alt="Kotak Hijau Utama Logo">
+          PT. KOTAK HIJAU UTAMA
         </a>
-
+        
+        <div class="menu-toggle" id="menuToggle">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        
         <ul class="navbar-nav" id="navbarNav">
-            <li class="nav-item">
-                <a href="{{ url('/kotakhijauutama') }}" class="nav-link {{ request()->is('kotakhijauutama') ? 'active' : '' }}">Home</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ url('/kotakhijauutama/program') }}" class="nav-link {{ request()->is('kotakhijauutama/program') ? 'active' : '' }}">Program</a>
-            </li>
-            <li class="nav-item">
-                <a href="{{ url('/kotakhijauutama/services') }}" class="nav-link {{ request()->is('kotakhijauutama/services') ? 'active' : '' }}">Services</a>
-            </li>
+          <li class="nav-item">
+            <a href="{{ url('/kotakhijauutama') }}" class="nav-link">Home</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/kotakhijauutama/program') }}" class="nav-link">Program</a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/kotakhijauutama/services') }}" class="nav-link active">Services</a>
+          </li>
         </ul>
-    </nav>
+      </nav>
+    </div>
   </div>
 
-  <div class="about-bg">
-    <div class="about-bg-inner">
+  <!-- Services Hero Section -->
+  <div class="services-hero">
+    <div class="container">
+      <div>
         <h1>Services</h1>
-        <p style="margin-top: 0.5vw;"><span style="color: #5AB685;">Home /</span> <span style="text-decoration: underline;">Services</span></p>
+        <p><span>Home /</span> <span style="text-decoration: underline;">Services</span></p>
+      </div>
     </div>
   </div>
 
-  <p class="subheading" style="margin-top: 5vw;">
-    Kami menyediakan berbagai layanan profesional untuk mendukung kebutuhan operasional perusahaan Anda.<br>
-    Kami berkomitmen memberikan solusi tenaga kerja yang <b>andal, efisien,</b> dan <b>berkualitas</b> melalui beragam bidang layanan berikut.
-  </p>
+  <!-- Services Introduction -->
+  <div class="container">
+    <div class="subheading" style="margin-top: 20px;">
+      <p>Kami menyediakan berbagai layanan profesional untuk mendukung kebutuhan operasional perusahaan Anda. Kami berkomitmen memberikan solusi tenaga kerja yang <b>andal, efisien,</b> dan <b>berkualitas</b> melalui beragam bidang layanan berikut.</p>
+    </div>
+  </div>
 
-  
-    <div class="two-columns" id="security">
-        <div class="image-column"><img src="{{ asset('assets/khu_secservice.png') }}" alt="background Image"></div>
-        <div class="text-column" style="margin-left: -5vw;">
-            <h1>Security Services</h1>
-            <p>KHU Team memiliki tenaga pengamanan terlatih dan berpengalaman, siap memenuhi kebutuhan keamanan Anda. <br>
-                Menyediakan jasa pengamanan untuk kebutuhan pribadi maupun perusahaan dan telah dipercaya oleh berbagai perusahaan terkemuka di Indonesia.
-            </p>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_secicon.png') }}">
-                Security & Risk Assessment
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_physicon.png') }}">
-                Physical Security System
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_invesicon.png') }}">
-                Investigasi
-            </div>
+  <!-- Security Services -->
+  <div class="container">
+    <div class="service-section" id="security">
+      <div class="service-row">
+        <div class="service-image">
+          <img src="{{ asset('assets/khu_secservice.png') }}" alt="Security Services">
         </div>
+        <div class="service-content">
+          <h3 class="service-title">Security Services</h3>
+          <p class="service-description">KHU Team memiliki tenaga pengamanan terlatih dan berpengalaman, siap memenuhi kebutuhan keamanan Anda. Menyediakan jasa pengamanan untuk kebutuhan pribadi maupun perusahaan dan telah dipercaya oleh berbagai perusahaan terkemuka di Indonesia.</p>
+          <div class="service-items">
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_secicon.png') }}" alt="Security & Risk Assessment">
+              Security & Risk Assessment
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_physicon.png') }}" alt="Physical Security System">
+              Physical Security System
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_invesicon.png') }}" alt="Investigasi">
+              Investigasi
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Housekeeping Services -->
+  <div class="container">
+    <div class="service-section" id="housekeeping">
+      <div class="service-row reverse">
+        <div class="service-image">
+          <img src="{{ asset('assets/khu_houseservice.png') }}" alt="Housekeeping Services">
+        </div>
+        <div class="service-content">
+          <h3 class="service-title">Housekeeping Services</h3>
+          <p class="service-description">KHU Team siap membantu menciptakan lingkungan kerja yang bersih, nyaman, dan efisien melalui layanan perawatan menyeluruh di seluruh area kerja dan sekitarnya demi menjaga kebersihan serta kenyamanan ruang kerja agar menciptakan suasana positif bagi karyawan, tamu, dan klien. Menyediakan layanan lengkap, meliputi:</p>
+          <div class="service-items">
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_genicon.png') }}" alt="General Cleaning">
+              General Cleaning
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_cleanicon.png') }}" alt="Cleaning Services">
+              Cleaning Services
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_gardicon.png') }}" alt="Gardening / Landscaping">
+              Gardening / Landscaping
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_wasteicon.png') }}" alt="Waste Management">
+              Waste Management
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_pesticon.png') }}" alt="Pest & Rodent Control">
+              Pest & Rodent Control
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Office & Facility Support -->
+  <div class="container">
+    <div class="service-section" id="office">
+      <div class="service-row">
+        <div class="service-image">
+          <img src="{{ asset('assets/khu_offservice.png') }}" alt="Office & Facility Support">
+        </div>
+        <div class="service-content">
+          <h3 class="service-title">Office & Facility Support</h3>
+          <p class="service-description">KHU Team menyediakan tenaga terampil yang siap mendukung kegiatan operasional harian perusahaan Anda, terutama untuk bisnis dengan aktivitas tinggi. Menyediakan layanan <b>Office & Facility Support</b> meliputi:</p>
+          <div class="service-items">
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_officon.png') }}" alt="Office Boy / Girl">
+              Office Boy / Girl
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_messicon.png') }}" alt="Messenger">
+              Messenger
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_drivericon.png') }}" alt="Driver">
+              Driver
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Front Office Services -->
+  <div class="container">
+    <div class="service-section" id="front">
+      <div class="service-row reverse">
+        <div class="service-image">
+          <img src="{{ asset('assets/khu_frontservice.png') }}" alt="Front Office Services">
+        </div>
+        <div class="service-content">
+          <h3 class="service-title">Front Office Services</h3>
+          <p class="service-description">KHU Team berpengalaman dalam menyediakan tenaga profesional untuk posisi front office dan administrasi, guna mendukung kelancaran operasional perusahaan Anda. Menyediakan petugas Front Office meliputi:</p>
+          <div class="service-items">
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_recepicon.png') }}" alt="Receptionist">
+              Receptionist
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_custicon.png') }}" alt="Customer Service Officer">
+              Customer Service Officer
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_phoneicon.png') }}" alt="Phone Operator">
+              Phone Operator
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_infoicon.png') }}" alt="Information Help Desk">
+              Information Help Desk
+            </div>
+            <div class="service-item">
+              <img src="{{ asset('assets/khu_dataicon.png') }}" alt="Data Administration">
+              Data Administration
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery Section -->
+  <div class="container">
+    <div class="section-header">
+      <h2>Gallery</h2>
     </div>
 
-    <div class="two-columns" id="housekeeping">
-        <div class="text-column" style="margin-right: -11vw;">
-            <h1>Housekeeping Services</h1>
-            <p>KHU Team siap membantu menciptakan lingkungan kerja yang bersih, nyaman, dan efisien melalui layanan perawatan menyeluruh di seluruh area kerja
-                dan sekitarnya demi menjaga kebersihan serta kenyamanan ruang kerja agar menciptakan suasana positif bagi karyawan, tamu, dan klien.
-                <br>Menyediakan layanan lengkap, meliputi:
-            </p>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_genicon.png') }}">
-                General Cleaning
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_cleanicon.png') }}">
-                Cleaning Services
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_gardicon.png') }}">
-                Gardening / Landscaping
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_wasteicon.png') }}">
-                Waste Management
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_pesticon.png') }}">
-                Pest & Rodent Control
-            </div>
-        </div>
-        <div class="image-column"><img src="{{ asset('assets/khu_houseservice.png') }}" alt="background Image"></div>
+    <div class="gallery-section">
+      <div class="gallery-image">
+        <img src="{{ asset('assets/khu_gallery.png') }}" alt="Gallery">
+      </div>
     </div>
+  </div>
 
-    <div class="two-columns" id="office">
-        <div class="image-column"><img src="{{ asset('assets/khu_offservice.png') }}" alt="background Image"></div>
-        <div class="text-column" style="margin-left: -24vw;">
-            <h1>Office & Facility Support</h1>
-            <p>KHU Team menyediakan tenaga terampil yang siap mendukung kegiatan operasional harian perusahaan Anda, terutama untuk bisnis dengan aktivitas tinggi.
-                <br>Menyediakan layanan <b>Office & Facility Support</b> meliputi:
-            </p>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_officon.png') }}">
-                Office Boy / Girl
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_messicon.png') }}">
-                Messenger
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_drivericon.png') }}">
-                Driver
-            </div>
+  <!-- Footer -->
+  <div class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="company-info">
+          <h3>Kotak Hijau Utama</h3>
+          <p>Graha Enka Deli, Jl. Buncit Raya</p>
+          <p>No.12 12, RT.12/RW.12, Kalibata,</p>
+          <p>Kec. Pancoran, Kota Jakarta Selatan,</p>
+          <p>Daerah Khusus Ibukota Jakarta</p>
+          <p>12740</p>
         </div>
+        <div class="perusahaan">
+          <h3>Perusahaan</h3>
+          <p>Tridaya Dimensi Indonesia</p>
+          <p>Indodaya Alihtama</p>
+          <p>BursaKarir</p>
+        </div>
+        <div class="contact-details">
+          <h3>Contact Details</h3>
+          <p>Phone : 0813-1146-5499</p>
+          <p>Email : simon@kotak-hijau.com</p>
+        </div>
+      </div>
     </div>
+  </div>
 
-    <div class="two-columns" id="front">
-        <div class="text-column" style="margin-right: -11vw;">
-            <h1>Front Office Services</h1>
-            <p>KHU Team berpengalaman dalam menyediakan tenaga profesional untuk posisi front office dan administrasi, guna mendukung kelancaran operasional perusahaan Anda.
-                <br>Menyediakan petugas Front Office meliputi:
-            </p>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_recepicon.png') }}">
-                Receptionist
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_custicon.png') }}">
-                Customer Service Officer
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_phoneicon.png') }}">
-                Phone Operator
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_infoicon.png') }}">
-                Information Help Desk
-            </div>
-            <div class="service-item">
-                <img src="{{ asset('assets/khu_dataicon.png') }}">
-                Data Administration
-            </div>
-        </div>
-        <div class="image-column"><img src="{{ asset('assets/khu_frontservice.png') }}" alt="background Image"></div>
-    </div>
+  <script>
+    // Mobile menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navbarNav = document.getElementById('navbarNav');
     
+    menuToggle.addEventListener('click', function(event) {
+      event.stopPropagation();
+      navbarNav.classList.toggle('active');
+    });
     
-  <div class="line-with-text" style="margin-top: 10vw;">
-    <span>Gallery</span>
-  </div>
-
-  <div style="text-align: center">
-    <img src="{{ asset('assets/khu_gallery.png') }}" style="width: 85vw;"/>
-  </div>
-
-  
-  <div class="footer"> 
-    <div class="tdi-footer">
-        <h1>Kotak Hijau Utama</h1>
-        <p>Graha Enka Deli, Jl. Buncit Raya</p>
-        <p>No.12 12, RT.12/RW.12, Kalibata,</p>
-        <p>Kec. Pancoran, KOta Jakarta Selatan,</p>
-        <p>Daerah Khusus Ibukota Jakarta</p>
-        <p>12740</p>
-    </div>
-    <div class="perusahaan">
-        <h1>Perusahaan</h1>
-        <p>Tridaya Dimensi Indonesia</p>
-        <p>Indodaya Alihtama</p>
-        <p>BursaKarir</p>
-    </div>
-    <div class="contact-details">
-        <h1>Contact Details</h1>
-        <p>Phone : 0813-1146-5499</p>
-        <p>Email : simon@kotak-hijau.com</p>
-    </div>
-  </div>
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.navbar') && navbarNav.classList.contains('active')) {
+        navbarNav.classList.remove('active');
+      }
+    });
+    
+    // Close menu when clicking on a link
+    const navLinks = document.querySelectorAll('.nav-link');
+    navLinks.forEach(link => {
+      link.addEventListener('click', function() {
+        navbarNav.classList.remove('active');
+      });
+    });
+  </script>
 </body>
+</html>
