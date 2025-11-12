@@ -35,6 +35,9 @@
     .navbar-container {
       background-color: #ffffff;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
     
     .navbar {
@@ -50,19 +53,18 @@
       text-decoration: none;
       color: #2c3e50;
       font-weight: bold;
-      font-size: 25px;
-      min-width: 300px;
+      font-size: 22px;
     }
     
     .logo {
-      width: 60px;
-      margin-right: 15px;
+      width: 50px;
+      margin-right: 12px;
     }
     
     .navbar-nav {
       display: flex;
       list-style: none;
-      gap: 40px;
+      gap: 30px;
     }
     
     .nav-link {
@@ -72,7 +74,7 @@
       padding: 8px 0;
       transition: all 0.3s;
       position: relative;
-      font-size: 15px;
+      font-size: 16px;
       white-space: nowrap;
     }
     
@@ -96,15 +98,19 @@
       display: none;
       flex-direction: column;
       cursor: pointer;
+      padding: 5px;
+      z-index: 102;
     }
     
     .menu-toggle span {
       height: 3px;
       width: 25px;
       background: #2c3e50;
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       border-radius: 2px;
+      transition: 0.3s;
     }
+
 
     /* Hero Section */
     .hero {

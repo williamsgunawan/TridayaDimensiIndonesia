@@ -118,12 +118,17 @@
       min-height: 500px;
       max-height: 600px;
       overflow: hidden;
+      background-image: url("{{ asset('assets/iat_bg.png') }}");
+      background-size: cover;
+      background-position: center;
+      height: 400px;
     }
     
     .hero-bg {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
+      position: absolute;
+      height: 500px;
+      bottom: 0px;
+      right: 30px;
     }
     
     .hero-content {
@@ -458,6 +463,10 @@
         min-height: 400px;
       }
       
+      .hero-bg {
+        display: none;
+      }
+
       .hero-content {
         width: 90%;
         left: 5%;
@@ -639,7 +648,7 @@
             <a href="{{ url('/indodaya/career') }}" class="nav-link">Career</a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/indodaya/contactus') }}" class="nav-link">Contact Us</a>
+            <a href="#" class="nav-link" onclick="window.open('https://wa.me/628888387551', '_blank')">Contact Us</a>
           </li>
         </ul>
       </nav>
@@ -648,7 +657,8 @@
 
   <!-- Hero Section -->
   <div class="hero">
-    <img src="{{ asset('assets/iat_homebg.png') }}" alt="background Image" class="hero-bg">
+    <img src="{{ asset('assets/iat_bgperson.png') }}" alt="background Image" class="hero-bg">
+
     <div class="hero-content">
       <h1 class="hero-heading">Solusi Outsourcing Andal untuk SDM Profesional</h1>
       <p class="hero-body">Kami membantu perusahaan memenuhi kebutuhan tenaga kerja yang kompeten dan efisien di seluruh Indonesia.</p>
@@ -722,7 +732,7 @@
     <div class="tenaga-kerja-content">
       <h2>Butuh Tenaga Kerja Profesional?</h2>
       <p>Hubungi kami sekarang untuk konsultasi gratis.</p>
-      <a href="#" class="cta-button" onclick="window.open('https://wa.me/6287777785464', '_blank')">Konsultasi Sekarang</a>
+      <a href="#" class="cta-button" onclick="window.open('https://wa.me/628888387551', '_blank')">Konsultasi Sekarang</a>
     </div>
   </div>
 
